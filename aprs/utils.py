@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
+## Utility functions pulled from aprs-python
+## https://github.com/rossengeorgiev/aprs-python
+
 from math import floor
 
 def degrees_to_ddm(dd):

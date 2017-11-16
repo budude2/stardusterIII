@@ -14,7 +14,7 @@ mypkt.longitude = -96.670547
 mypkt.icon      = "O"
 mypkt.heading   = 271
 mypkt.speed     = 12
-mypkt.altitude   = 600
+mypkt.altitude  = 600
 
 print(str(mypkt))
 print(mypkt.serialize())
