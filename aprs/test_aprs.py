@@ -21,6 +21,8 @@ exitApp = False
 lat = 0
 lon = 0
 alt = 0
+heading = 0
+speed = 0
 
 def sigint_handler(signum, frame):
     global exitApp
@@ -42,6 +44,8 @@ def get_gps():
     global lat
     global lon
     global alt
+    global heading
+    global speed
 
     while (exitApp == False):
         data = gps.readline().decode('ascii')
@@ -59,14 +63,20 @@ def get_gps():
                 if(msg.altitude_units == 'M'):
                     alt = msg.altitude * (1/0.3048)
 
-                print("Altitude:", str(round(alt, 2)), "ft\n")
+                print("Altitude:", str(round(alt, 2)), "ft")
 
             if isinstance(msg, pynmea2.types.talker.VTG):
-                heading = msg.mag_track
-                speed = msg.spd_over_grnd_kmph
+                # Magnetic north
+                if msg.mag_track is None:
+                    heading = 0
+                else:
+                    heading = msg.mag_track
+
+                # Convert kmph to mph
+                speed = msg.spd_over_grnd_kmph * 1.609344
 
                 print("heading:", heading)
-                print("speed:", speed)
+                print("speed:", speed, "\n")
         except:
             pass
 
@@ -77,17 +87,17 @@ def aprs():
     mypkt = utils.position_pkt()
 
     while (exitApp == False):
-        print('loop')
-        print(exitApp)
         mypkt.latitude  = lat
         mypkt.longitude = lon
         mypkt.icon      = "O"
-        mypkt.heading   = 271
-        mypkt.speed     = 12
+        mypkt.heading   = heading
+        mypkt.speed     = speed
         mypkt.altitude  = alt
 
+        print("\n")
         print(str(mypkt))
         print(mypkt.serialize())
+        print("\n")
 
         time.sleep(5)
 
