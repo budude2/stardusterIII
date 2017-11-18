@@ -37,6 +37,7 @@ except serial.SerialException:
     print("Is it configured correctly?")
     sys.exit(0)
 
+######################### GPS Data Thread #########################
 def get_gps():
     global lat
     global lon
@@ -59,11 +60,19 @@ def get_gps():
                     alt = msg.altitude * (1/0.3048)
 
                 print("Altitude:", str(round(alt, 2)), "ft\n")
+
+            if isinstance(msg, pynmea2.types.talker.VTG):
+                heading = msg.mag_track
+                speed = msg.spd_over_grnd_kmph
+
+                print("heading:", heading)
+                print("speed:", speed)
         except:
             pass
 
     gps.close()
 
+######################### APRS Thread #########################
 def aprs():
     mypkt = utils.position_pkt()
 
@@ -82,6 +91,7 @@ def aprs():
 
         time.sleep(5)
 
+######################### Start Threads #########################
 gps_thread = Thread(target = get_gps)
 gps_thread.start()
 
