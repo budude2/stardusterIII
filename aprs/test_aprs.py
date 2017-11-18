@@ -53,8 +53,8 @@ def get_gps():
             msg = pynmea2.parse(data)
 
             if isinstance(msg, pynmea2.types.talker.GGA):
-                lat = msg.latitude
-                lon = msg.longitude
+                lat = round(msg.latitude, 5)
+                lon = round(msg.longitude, 5)
 
                 print("Latitude:", lat)
                 print("Longitude:", lon)
@@ -73,7 +73,7 @@ def get_gps():
                     heading = msg.mag_track
 
                 # Convert kmph to mph
-                speed = msg.spd_over_grnd_kmph * 1.609344
+                speed = round(msg.spd_over_grnd_kmph * 1.609344, 2)
 
                 print("heading:", heading)
                 print("speed:", speed, "\n")
