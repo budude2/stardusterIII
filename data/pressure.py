@@ -15,8 +15,11 @@ print(data)
 press_raw = (data[0] << 8) + data[1]
 print(press_raw)
 
-press = (press_raw - 1638) * 15 / 13107
+press = (press_raw - 1638) * 15 / 13107 + 0.48
 print(press, "psi")
 
 press_mb = round(press * 68.947572931783, 2)
 print(press_mb, "mb")
+
+pressure_inhg = round(press * 2.03602, 2)
+print(pressure_inhg, "inhg")
