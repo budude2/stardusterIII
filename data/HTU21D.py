@@ -26,7 +26,7 @@ class HTU21D:
     def reset(self):
         self.bus.write_byte(I2C_ADDR, CMD_RESET)
 
-#if __name__ == '__main__':
-#    htu = HTU21D(1)
-#    print htu.read_temperature()
-#    print htu.read_humidity()#
+if __name__ == '__main__':
+   htu = HTU21D(1)
+   print htu.read_temperature()
+   print htu.read_humidity()#
