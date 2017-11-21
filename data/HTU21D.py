@@ -28,5 +28,5 @@ class HTU21D:
 
 if __name__ == '__main__':
    htu = HTU21D(1)
-   print htu.read_temperature()
-   print htu.read_humidity()#
+   print(htu.read_temperature())
+   print(htu.read_humidity())

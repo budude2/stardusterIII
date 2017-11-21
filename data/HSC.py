@@ -10,7 +10,7 @@ class HSC:
     def read_pressure(self):
 
         # Trigger the pressure sensor to read data
-        self.bus.write_byte_data(0x28, 0)
+        self.bus.write_byte(0x28, 0)
 
         # Read the response
         data = self.bus.read_i2c_block_data(0x28, 4)
@@ -23,7 +23,7 @@ class HSC:
         press_raw = (data[0] << 8) + data[1]
 
         # Return the pressure in PSI
-        return (press_raw - 1638) * 15 / 13107 + 0.48
+        return (press_raw - 1638) * 15 / 13107 + 0.46
 
     def read_pressure_mb(self):
         psi = self.read_pressure()
