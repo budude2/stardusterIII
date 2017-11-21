@@ -12,9 +12,10 @@ import signal
 # aprstnc = serial.Serial('/dev/ttyUSB0', 119200)
 
 # Setup GPS Serial port
-gps = serial.Serial()
-gps.baudrate = 9600
-gps.port = '/dev/tty.usbserial-A5058GNQ'
+gps = serial.Serial('/dev/ttyAMA0')
+
+rfd = serial.Serial('/dev/ttyUSB0', 57600, rtscts = 1)
+rfd.write(b"hello!\r\n")
 
 # Global Variables
 exitApp = False
@@ -32,13 +33,6 @@ def sigint_handler(signum, frame):
 
 signal.signal(signal.SIGINT, sigint_handler)
 
-try:
-    gps.open()
-except serial.SerialException:
-    print("Could not open serial port.")
-    print("Is it configured correctly?")
-    sys.exit(0)
-
 ######################### GPS Data Thread #########################
 def get_gps():
     global lat
@@ -48,8 +42,8 @@ def get_gps():
     global speed
 
     while (exitApp == False):
-        data = gps.readline().decode('ascii')
         try:
+            data = gps.readline().decode('ascii')
             msg = pynmea2.parse(data)
 
             if isinstance(msg, pynmea2.types.talker.GGA):
@@ -60,10 +54,15 @@ def get_gps():
                 print("Longitude:", lon)
                 print("Numb Sats:", msg.num_sats)
 
+                rfd.write(b"Latitude: " + bytes(str(lat), 'UTF-8') + b"\r\n")
+                rfd.write(b"Longitue: " + bytes(str(lon), 'UTF-8') + b"\r\n")
+                rfd.write(b"Numb sats: " + bytes(str(msg.num_sats), 'UTF-8') + b"\r\n")
+
                 if(msg.altitude_units == 'M'):
                     alt = msg.altitude * (1/0.3048)
 
                 print("Altitude:", str(round(alt, 2)), "ft")
+                rfd.write(b"Altitude: " + bytes(str(round(alt,2)), 'UTF-8') + b"\r\n\n")
 
             if isinstance(msg, pynmea2.types.talker.VTG):
                 # Magnetic north
@@ -98,6 +97,9 @@ def aprs():
         print(str(mypkt))
         print(mypkt.serialize())
         print("\n")
+
+        rfd.write(mypkt.serialize())
+        rfd.write(b"\n")
 
         time.sleep(5)
 
