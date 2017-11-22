@@ -4,52 +4,23 @@
 ## Utility functions pulled from aprs-python
 ## https://github.com/rossengeorgiev/aprs-python
 
-from math import floor
+from math import floor, ceil
 
 def degrees_to_ddm(dd):
     degrees = int(floor(dd))
     minutes = (dd - degrees) * 60
     return (degrees, minutes)
 
-def latitude_to_ddm(dd):
-    direction = "S" if dd < 0 else "N"
-    degrees, minutes = degrees_to_ddm(abs(dd))
+def mice_long(dd):
+    loc = degrees_to_ddm(abs(dd))
+    degrees = loc[0]
+    minutes = floor(loc[1])
 
-    return "{0:02d}{1:05.2f}{2}".format(
-        degrees,
-        minutes,
-        direction,
-        )
+    minutes_hundreths = floor(100*(loc[1] - minutes))
 
-def longitude_to_ddm(dd):
-    direction = "W" if dd < 0 else "E"
-    degrees, minutes = degrees_to_ddm(abs(dd))
-
-    return "{0:03d}{1:05.2f}{2}".format(
-       degrees,
-       minutes,
-       direction,
-       )
+    return (degrees, minutes, minutes_hundreths)
 
 def comment_altitude(altitude):
     altitude = min(999999, altitude)
     altitude = max(-99999, altitude)
     return "/A={0:06.0f}".format(altitude)
-
-class position_pkt(object):
-    latitude  = 0
-    longitude = 0
-    icon      = ''
-    heading   = 0
-    speed     = 0
-    altitude  = 0
-
-
-    def __init__(self):
-        self.data = []
-
-    def __str__(self):
-        return str(latitude_to_ddm(self.latitude)) + "/" + str(longitude_to_ddm(self.longitude)) + self.icon + str(self.heading) + "/" + str(self.speed) + comment_altitude(self.altitude)
-
-    def serialize(self):
-        return str.encode(str(latitude_to_ddm(self.latitude)) + "/" + str(longitude_to_ddm(self.longitude)) + self.icon + str(self.heading) + "/" + str(self.speed) + comment_altitude(self.altitude)) + b'\x0D'
