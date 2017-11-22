@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
+# Work based HEAVILY on https://hugosprojects.wordpress.com/2014/03/20/implementing-aprs-gps-data/
+
 import utils
 from math import floor
 
@@ -57,7 +59,7 @@ def encode_dest(dd, mode, long_offset, west):
     else:
         string += characters[minutes_hundreths_1]
 
-    print(string)
+    return string
 
 def encode_info(dd, speed, heading):
     (degrees, minutes, minutes_hundreths) = utils.mice_long(dd)
@@ -109,4 +111,40 @@ def encode_info(dd, speed, heading):
     string += "/"
 
 
-    return string
+    return string, west, long_offset
+
+def altitude(alt):
+    alt_m = round(alt * 0.3048)
+    rel_alt = alt_m + 10000
+    
+    val_1 = int(rel_alt / 8281)
+    rem = rel_alt % 8281
+
+    val_2 = int(rem / 91)
+    val_3 = rem % 91
+
+    return chr(val_1 + 33) + chr(val_2 + 33) + chr(val_3 + 33) + "}"
+
+
+class mice_pkt(object):
+    callsign  = ""
+    path      = ""
+    mode      = 7
+    latitude  = 0
+    longitude = 0
+    heading   = 0
+
+    # In knots
+    speed     = 0
+    # In feet
+    altitude  = 0
+
+    def __init__(self):
+        self.data = []
+
+    def __str__(self):
+
+        (info_string, west, long_offset) = encode_info(self.longitude, self.speed, self.heading)
+        dest_string = encode_dest(self.latitude, self.mode, long_offset, west)
+        alt_string = altitude(self.altitude)
+        return self.callsign + ">" + dest_string + "," + self.path + ":" + info_string + alt_string
