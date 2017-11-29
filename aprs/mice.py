@@ -102,7 +102,7 @@ def encode_info(dd, speed, heading):
     else:
         string += chr(speed_ht + 28)
 
-    string += chr((speed_units*10) + heading_hundreds + 32)
+    string += chr((int(speed_units*10)) + heading_hundreds + 32)
 
     string += chr(heading_tens_units + 28)
 
@@ -130,14 +130,14 @@ class mice_pkt(object):
     callsign  = ""
     path      = ""
     mode      = 7
-    latitude  = 0
-    longitude = 0
-    heading   = 0
+    latitude  = 0.0
+    longitude = 0.0
+    heading   = 0.0
 
     # In knots
-    speed     = 0
+    speed     = 0.0
     # In feet
-    altitude  = 0
+    altitude  = 0.0
 
     def __init__(self):
         self.data = []
