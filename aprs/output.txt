@@ -1,0 +1,226 @@
+
+
+>PPPPP0,:`vXl O/"3r}
+
+
+Latitude: 33.12799
+Longitude: -96.68044
+Numb Sats: 08
+Altitude: 358.92 ft
+heading: 0
+speed: 0.0 
+
+Latitude: 33.12799
+Longitude: -96.68044
+Numb Sats: 10
+Altitude: 358.92 ft
+heading: 0
+speed: 0.0 
+
+Latitude: 33.12799
+Longitude: -96.68044
+Numb Sats: 10
+Altitude: 358.92 ft
+heading: 0
+speed: 0.0 
+
+Latitude: 33.12799
+Longitude: -96.68044
+Numb Sats: 09
+Altitude: 358.92 ft
+heading: 0
+speed: 0.0 
+
+Latitude: 33.12799
+Longitude: -96.68044
+Numb Sats: 10
+Altitude: 358.92 ft
+heading: 0
+speed: 0.0 
+
+
+
+>SSPW6W,:`|Dnl O/"5)}
+
+
+Latitude: 33.12799
+Longitude: -96.68044
+Numb Sats: 10
+Altitude: 358.92 ft
+heading: 0
+speed: 0.0 
+
+Latitude: 33.12799
+Longitude: -96.68044
+Numb Sats: 10
+Altitude: 358.92 ft
+heading: 0
+speed: 0.0 
+
+Latitude: 33.12799
+Longitude: -96.68044
+Numb Sats: 10
+Altitude: 358.92 ft
+heading: 0
+speed: 0.0 
+
+Latitude: 33.12799
+Longitude: -96.68044
+Numb Sats: 10
+Altitude: 358.92 ft
+heading: 0
+speed: 0.0 
+
+Latitude: 33.12799
+Longitude: -96.68044
+Numb Sats: 10
+Altitude: 358.92 ft
+heading: 0
+speed: 0.0 
+
+
+
+>SSPW6W,:`|Dnl O/"5)}
+
+
+Latitude: 33.12799
+Longitude: -96.68044
+Numb Sats: 10
+Altitude: 358.92 ft
+heading: 0
+speed: 0.0 
+
+Latitude: 33.12799
+Longitude: -96.68044
+Numb Sats: 10
+Altitude: 358.92 ft
+heading: 0
+speed: 0.0 
+
+Latitude: 33.12799
+Longitude: -96.68044
+Numb Sats: 10
+Altitude: 358.92 ft
+heading: 0
+speed: 0.0 
+
+Latitude: 33.12799
+Longitude: -96.68044
+Numb Sats: 10
+Altitude: 358.92 ft
+heading: 0
+speed: 0.0 
+
+Latitude: 33.12799
+Longitude: -96.68044
+Numb Sats: 10
+Altitude: 358.92 ft
+heading: 0
+speed: 0.0 
+
+
+
+>SSPW6W,:`|Dnl O/"5)}
+
+
+Latitude: 33.12799
+Longitude: -96.68044
+Numb Sats: 10
+Altitude: 358.92 ft
+heading: 0
+speed: 0.0 
+
+Latitude: 33.12799
+Longitude: -96.68044
+Numb Sats: 10
+Altitude: 358.92 ft
+heading: 0
+speed: 0.0 
+
+Latitude: 33.12799
+Longitude: -96.68044
+Numb Sats: 10
+Altitude: 358.92 ft
+heading: 0
+speed: 0.0 
+
+Latitude: 33.12799
+Longitude: -96.68044
+Numb Sats: 10
+Altitude: 358.92 ft
+heading: 0
+speed: 0.0 
+
+Latitude: 33.12799
+Longitude: -96.68044
+Numb Sats: 10
+Altitude: 358.92 ft
+heading: 0
+speed: 0.0 
+
+
+
+>SSPW6W,:`|Dnl O/"5)}
+
+
+Latitude: 33.12799
+Longitude: -96.68044
+Numb Sats: 10
+Altitude: 358.92 ft
+heading: 0
+speed: 0.0 
+
+Latitude: 33.12799
+Longitude: -96.68044
+Numb Sats: 10
+Altitude: 358.92 ft
+heading: 0
+speed: 0.0 
+
+Latitude: 33.12799
+Longitude: -96.68044
+Numb Sats: 10
+Altitude: 358.92 ft
+heading: 0
+speed: 0.0 
+
+Latitude: 33.12799
+Longitude: -96.68044
+Numb Sats: 10
+Altitude: 358.92 ft
+heading: 0
+speed: 0.0 
+
+Latitude: 33.12799
+Longitude: -96.68044
+Numb Sats: 10
+Altitude: 358.92 ft
+heading: 0
+speed: 0.0 
+
+
+
+>SSPW6W,:`|Dnl O/"5)}
+
+
+Latitude: 33.12799
+Longitude: -96.68044
+Numb Sats: 10
+Altitude: 358.92 ft
+heading: 0
+speed: 0.0 
+
+Latitude: 33.12799
+Longitude: -96.68044
+Numb Sats: 10
+Altitude: 358.92 ft
+heading: 0
+speed: 0.0 
+
+
+Closing...
+
+Latitude: 33.12799
+Longitude: -96.68044
+Numb Sats: 10
+Altitude: 358.92 ft
