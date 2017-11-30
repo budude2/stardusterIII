@@ -32,7 +32,6 @@ alt = 0
 heading = 0
 speed = 0
 
-
 # Exit cleanly
 def sigint_handler(signum, frame):
     global exitApp
@@ -143,6 +142,9 @@ def rfd_data():
     else:
         print("IMU Init Succeeded")
 
+    data_file = open('data.csv', 'w')
+    data_file.write("lat, lon, speed, heading, alt, temp, hum, pres, roll, pitch, yaw, x, y, z\r\n")
+
 # this is a good time to set any fusion parameters
 
     imu.setSlerpPower(0.02)
@@ -159,10 +161,10 @@ def rfd_data():
             fusionPose = data["fusionPose"]
             accel = data["accel"]
 
-        string = bytes(str(lat) + "," + str(lon) + "," + str(speed) + "," + str(heading) + "," + str(round(alt, 2)) + "," + str(temperature) + "," + str(humidity) + "," + str(pressure) + "," + str(round(math.degrees(fusionPose[0]), 2)) + "," + str(round(math.degrees(fusionPose[1]), 2)) + "," + str(round(math.degrees(fusionPose[2]), 2)) + "," + str(round(accel[0], 2)) + "," + str(round(accel[1], 2)) + "," + str(round(accel[2], 2)) + "\r\n", 'UTF-8')
+        string = str(lat) + "," + str(lon) + "," + str(speed) + "," + str(heading) + "," + str(round(alt, 2)) + "," + str(temperature) + "," + str(humidity) + "," + str(pressure) + "," + str(round(math.degrees(fusionPose[0]), 2)) + "," + str(round(math.degrees(fusionPose[1]), 2)) + "," + str(round(math.degrees(fusionPose[2]), 2)) + "," + str(round(accel[0], 2)) + "," + str(round(accel[1], 2)) + "," + str(round(accel[2], 2)) + "\r\n"
 
-        rfd.write(string)
-
+        rfd.write(bytes(string, 'UTF-8'))
+        data_file.write(string)
         time.sleep(1)
 
 ######################### Start Threads #########################
