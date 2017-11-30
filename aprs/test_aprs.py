@@ -13,6 +13,7 @@ import HTU21D
 import RTIMU
 import os.path
 import math
+import HSC
 
 # aprstnc = serial.Serial('/dev/ttyUSB0', 119200)
 
@@ -118,10 +119,12 @@ def rfd_data():
     # Setup Sensors
     hum = HTU21D.HTU21D(1)
     temp = max31865.max31865(8,9,10,11)
+    press = HSC.HSC(1)
     string = ""
 
     temperature = 0
     humidity = 0
+    pressure = 0
 
     SETTINGS_FILE = "RTIMULib"
 
@@ -142,18 +145,18 @@ def rfd_data():
 
 # this is a good time to set any fusion parameters
 
-imu.setSlerpPower(0.02)
-imu.setGyroEnable(True)
-imu.setAccelEnable(True)
-imu.setCompassEnable(True)
+    imu.setSlerpPower(0.02)
+    imu.setGyroEnable(True)
+    imu.setAccelEnable(True)
+    imu.setCompassEnable(True)
 
     while(exitApp == False):
         humidity = round(hum.read_humidity(), 2)
         temperature = round(temp.readTemp(), 2)
+        pressure = press.read_pressure()
 
-        string = bytes(str(lat) + "," + str(lon) + "," + str(speed) + "," + str(heading) + "," + str(round(alt, 2)) + "," + str(temperature) + "," + str(humidity) + "\r\n", 'UTF-8')
+        string = bytes(str(lat) + "," + str(lon) + "," + str(speed) + "," + str(heading) + "," + str(round(alt, 2)) + "," + str(temperature) + "," + str(humidity) + "," + str(pressure) + "\r\n", 'UTF-8')
 
-        print(str(temperature) + "\r\n")
         rfd.write(string)
 
         time.sleep(1)
