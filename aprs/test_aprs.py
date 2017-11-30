@@ -3,14 +3,16 @@
 
 import serial
 import pynmea2
-import utils
 from threading import Thread
 import time
-import sys
+import sys, getopt
 import signal
 import mice
 import max31865
 import HTU21D
+import RTIMU
+import os.path
+import math
 
 # aprstnc = serial.Serial('/dev/ttyUSB0', 119200)
 
@@ -117,16 +119,40 @@ def rfd_data():
     hum = HTU21D.HTU21D(1)
     temp = max31865.max31865(8,9,10,11)
     string = ""
-    
+
     temperature = 0
     humidity = 0
+
+    SETTINGS_FILE = "RTIMULib"
+
+    print("Using settings file " + SETTINGS_FILE + ".ini")
+    if not os.path.exists(SETTINGS_FILE + ".ini"):
+      print("Settings file does not exist, will be created")
+
+    s = RTIMU.Settings(SETTINGS_FILE)
+    imu = RTIMU.RTIMU(s)
+
+    print("IMU Name: " + imu.IMUName())
+
+    if (not imu.IMUInit()):
+        print("IMU Init Failed")
+        sys.exit(1)
+    else:
+        print("IMU Init Succeeded")
+
+# this is a good time to set any fusion parameters
+
+imu.setSlerpPower(0.02)
+imu.setGyroEnable(True)
+imu.setAccelEnable(True)
+imu.setCompassEnable(True)
 
     while(exitApp == False):
         humidity = round(hum.read_humidity(), 2)
         temperature = round(temp.readTemp(), 2)
-        
+
         string = bytes(str(lat) + "," + str(lon) + "," + str(speed) + "," + str(heading) + "," + str(round(alt, 2)) + "," + str(temperature) + "," + str(humidity) + "\r\n", 'UTF-8')
-        
+
         print(str(temperature) + "\r\n")
         rfd.write(string)
 
