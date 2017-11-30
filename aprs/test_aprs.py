@@ -154,8 +154,12 @@ def rfd_data():
         humidity = round(hum.read_humidity(), 2)
         temperature = round(temp.readTemp(), 2)
         pressure = press.read_pressure()
+        if imu.IMURead():      
+            data = imu.getIMUData()
+            fusionPose = data["fusionPose"]
+            accel = data["accel"]
 
-        string = bytes(str(lat) + "," + str(lon) + "," + str(speed) + "," + str(heading) + "," + str(round(alt, 2)) + "," + str(temperature) + "," + str(humidity) + "," + str(pressure) + "\r\n", 'UTF-8')
+        string = bytes(str(lat) + "," + str(lon) + "," + str(speed) + "," + str(heading) + "," + str(round(alt, 2)) + "," + str(temperature) + "," + str(humidity) + "," + str(pressure) + "," + str(round(math.degrees(fusionPose[0]), 2)) + "," + str(round(math.degrees(fusionPose[1]), 2)) + "," + str(round(math.degrees(fusionPose[2]), 2)) + "," + str(round(accel[0], 2)) + "," + str(round(accel[1], 2)) + "," + str(round(accel[2], 2)) + "\r\n", 'UTF-8')
 
         rfd.write(string)
 
