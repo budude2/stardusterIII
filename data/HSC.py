@@ -23,5 +23,7 @@ class HSC:
         # Combine data bytes
         press_raw = (data[0] << 8) + data[1]
 
+        self.bus.i2c_close(self.handle)
+
         # Return the pressure in PSI
         return round(((press_raw - 1638) * 1600 ) / 13107 + 23, 2)

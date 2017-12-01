@@ -23,6 +23,7 @@ class HTU21D:
     def read_humidity(self):
         self.reset()
         (stat, data) = self.bus.i2c_read_i2c_block_data(self.handle, CMD_TRIG_HUMID_HM, 3)
+        self.bus.i2c_close(self.handle)
         return -6 + 125 * (data[0] * 256 + data[1]) / 65536.0
 
     def reset(self):
@@ -30,5 +31,5 @@ class HTU21D:
 
 if __name__ == '__main__':
    htu = HTU21D(1)
-   #print(htu.read_temperature())
+   print(htu.read_temperature())
    print(htu.read_humidity())
