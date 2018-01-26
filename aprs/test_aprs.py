@@ -120,6 +120,7 @@ def rfd_data():
     temp = max31865.max31865(8,9,10,11)
     press = HSC.HSC(1)
     string = ""
+    counter = 0
 
     temperature = 0
     humidity = 0
@@ -161,11 +162,12 @@ def rfd_data():
             fusionPose = data["fusionPose"]
             accel = data["accel"]
 
-        string = str(lat) + "," + str(lon) + "," + str(speed) + "," + str(heading) + "," + str(round(alt, 2)) + "," + str(temperature) + "," + str(humidity) + "," + str(pressure) + "," + str(round(math.degrees(fusionPose[0]), 2)) + "," + str(round(math.degrees(fusionPose[1]), 2)) + "," + str(round(math.degrees(fusionPose[2]), 2)) + "," + str(round(accel[0], 2)) + "," + str(round(accel[1], 2)) + "," + str(round(accel[2], 2)) + "\r\n"
+        string = str(hex(counter)) + "," + str(lat) + "," + str(lon) + "," + str(speed) + "," + str(heading) + "," + str(round(alt, 2)) + "," + str(temperature) + "," + str(humidity) + "," + str(pressure) + "," + str(round(math.degrees(fusionPose[0]), 2)) + "," + str(round(math.degrees(fusionPose[1]), 2)) + "," + str(round(math.degrees(fusionPose[2]), 2)) + "," + str(round(accel[0], 2)) + "," + str(round(accel[1], 2)) + "," + str(round(accel[2], 2)) + "\r\n"
 
         rfd.write(bytes(string, 'UTF-8'))
         data_file.write(string)
-        time.sleep(1)
+        counter = counter + 1
+        time.sleep(0.1)
 
 ######################### Start Threads #########################
 gps_thread = Thread(target = get_gps)
